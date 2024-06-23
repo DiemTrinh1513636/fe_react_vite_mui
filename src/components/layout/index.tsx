@@ -27,10 +27,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
   }),
 }));
 
-
-
-
-export default function Layout({ children }) {
+export default function Layout({ children }: { children: any }) {
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -45,14 +42,14 @@ export default function Layout({ children }) {
       <Header
         open={open}
         handleDrawerOpen={handleDrawerOpen}
-        drawerWidth={drawerWidth} />
+        drawerWidth={drawerWidth}
+      />
       <SideBar
         drawerWidth={drawerWidth}
         open={open}
-        handleDrawerClose={handleDrawerClose} />
-      <Main open={open}>
-        {children}
-      </Main>
+        handleDrawerClose={handleDrawerClose}
+      />
+      <Main open={open}>{children}</Main>
     </Box>
   );
 }
