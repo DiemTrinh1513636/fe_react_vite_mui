@@ -2,9 +2,8 @@ import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
-
-import Header from './header';
-import SideBar from './sidebar';
+import Header from '@root/components/layout/header';
+import SideBar from '@root/components/layout/sidebar';
 
 const drawerWidth = 240;
 

@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import Category from '../pages/category';
+import CategoryPage from '../pages/category';
 import Home from '../pages/home';
 
 const routes = createBrowserRouter([
@@ -10,7 +10,7 @@ const routes = createBrowserRouter([
   },
   {
     path: '/category',
-    element: <Category />,
+    element: <CategoryPage />,
   },
 ]);
 

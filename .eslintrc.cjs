@@ -17,5 +17,6 @@ module.exports = {
     ],
     'max-len': ['error', { code: 120 }],
     eqeqeq: ['error'],
+    'react/react-in-jsx-scope': ['off'],
   },
 };

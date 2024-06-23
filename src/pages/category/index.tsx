@@ -1,11 +1,14 @@
-import Layout from '../../components/layout';
+import Category from '@root/components/category';
+import Layout from '@root/components/layout';
 
-const Category = () => {
-	return (<div>
-		<Layout>
-			This page to show nested category 
-		</Layout>
-	</div>)
-}
+const CategoryPage = () => {
+  return (
+    <div>
+      <Layout>
+        <Category></Category>
+      </Layout>
+    </div>
+  );
+};
 
-export default Category;
+export default CategoryPage;

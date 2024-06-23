@@ -1,4 +1,5 @@
 import { useTheme } from '@emotion/react';
+import AccessibilityIcon from '@mui/icons-material/Accessibility';
 import CategoryIcon from '@mui/icons-material/Category';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -12,7 +13,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { styled } from '@mui/material/styles';
 import { useLocation } from 'react-router-dom';
-import AccessibilityIcon from '@mui/icons-material/Accessibility';
+import { menuData } from './menu';
 
 interface SideBarProps {
   drawerWidth: number;
@@ -30,17 +31,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   backgroundColor: 'blue',
   color: 'white',
 }));
-
-const menuData = [
-  {
-    title: 'Category',
-    icon: <CategoryIcon />,
-  },
-  {
-    title: 'Accessibility',
-    icon: <AccessibilityIcon />,
-  },
-];
 
 const SideBar = ({ drawerWidth, open, handleDrawerClose }: SideBarProps) => {
   const location = useLocation();
@@ -71,7 +61,7 @@ const SideBar = ({ drawerWidth, open, handleDrawerClose }: SideBarProps) => {
       </DrawerHeader>
       <Divider />
       <List>
-        {menuData.map(({ title, icon }) => (
+        {menuData.map(({ title, icon, url }) => (
           <ListItem
             disablePadding
             key={title}
@@ -79,6 +69,7 @@ const SideBar = ({ drawerWidth, open, handleDrawerClose }: SideBarProps) => {
               backgroundColor:
                 location.pathname === '/' + title.toLowerCase() ? 'grey' : '',
             }}
+            onClick={() => (window.location.href = url)}
           >
             <ListItemButton>
               <ListItemIcon>{icon}</ListItemIcon>
