@@ -1,4 +1,6 @@
-import { Box, Tabs, Tab } from '@mui/material';
+import { Box, Tab, Tabs } from '@mui/material';
+import { CategoryList } from '@root/components/category/list';
+import { NestedCategory } from '@root/components/category/nested';
 import { useState } from 'react';
 
 interface TabPanelProps {
@@ -45,10 +47,10 @@ const Category = () => {
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        List
+        <CategoryList />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        Nested
+        <NestedCategory />
       </CustomTabPanel>
     </>
   );
