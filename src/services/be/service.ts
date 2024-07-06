@@ -1,6 +1,7 @@
 import { BE_PATH } from '@root/services/be/constant';
 import {
   TCategory,
+  TCategoryNested,
   TCategoryWithDepthPath,
   TCategoryWithParentId,
 } from '@root/services/be/types/category';
@@ -18,17 +19,6 @@ export class CategoryService {
     });
   }
 
-  async getFlatCategoryWithParentId(): Promise<TCategoryWithParentId[]> {
-    const response = await this._axios
-      .get(BE_PATH.GET_FLAT_CATEGORY_WITH_PARENT_ID)
-      .then((res) => res.data.data)
-      .catch((error) => {
-        console.log(error);
-        return [];
-      });
-    return response;
-  }
-
   async getFlatCategory(params?: {
     keyword?: string;
     page?: number;
@@ -38,6 +28,28 @@ export class CategoryService {
       .get(BE_PATH.GET_FLAT_CATEGORY, {
         params,
       })
+      .then((res) => res.data.data)
+      .catch((error) => {
+        console.log(error);
+        return [];
+      });
+    return response;
+  }
+
+  async getNestedCategory(): Promise<TCategoryNested[]> {
+    const response = await this._axios
+      .get(BE_PATH.GET_NESTED_CATEGORY)
+      .then((res) => res.data.data)
+      .catch((error) => {
+        console.log(error);
+        return [];
+      });
+    return response;
+  }
+
+  async getFlatCategoryWithParentId(): Promise<TCategoryWithParentId[]> {
+    const response = await this._axios
+      .get(BE_PATH.GET_FLAT_CATEGORY_WITH_PARENT_ID)
       .then((res) => res.data.data)
       .catch((error) => {
         console.log(error);

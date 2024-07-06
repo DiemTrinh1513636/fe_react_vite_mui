@@ -44,7 +44,7 @@ export const NestedCategoryFromDepthItem = ({
   );
 };
 
-export const NestedCategoryFromDepth = () => {
+export const NestedCategoryFromFlatDepth = () => {
   const [categoryData, setCategoryData] = useState<
     NestedCategoryFromDepthData[]
   >([]);

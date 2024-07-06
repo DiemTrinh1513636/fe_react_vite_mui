@@ -1,8 +1,9 @@
 import { Box, Tab, Tabs } from '@mui/material';
 import { CategoryList } from '@root/components/category/list';
-import { NestedCategory } from '@root/components/category/nested';
-import { NestedCategoryFromDepth } from '@root/components/category/nested-from-depth';
+import { NestedCategoryFromFlatParentId } from '@root/components/category/nested-from-flat-parent-id';
+import { NestedCategoryFromFlatDepth } from '@root/components/category/nested-from-flat-depth-path';
 import { useState } from 'react';
+import { NestedCategoryFromNested } from '@root/components/category/nested-from-nested';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -34,7 +35,7 @@ const a11yProps = (index: number) => {
 };
 
 const Category = () => {
-  const [value, setValue] = useState(2);
+  const [value, setValue] = useState(1);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -44,18 +45,22 @@ const Category = () => {
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange}>
           <Tab label="List category" {...a11yProps(0)} />
-          <Tab label="Nested category" {...a11yProps(1)} />
-          <Tab label="Nested category from depth" {...a11yProps(2)} />
+          <Tab label="Nested from nested" {...a11yProps(1)} />
+          <Tab label="Nested from flat parent id" {...a11yProps(2)} />
+          <Tab label="Nested from flat depth path" {...a11yProps(3)} />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
         <CategoryList />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        <NestedCategory />
+        <NestedCategoryFromNested />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        <NestedCategoryFromDepth />
+        <NestedCategoryFromFlatParentId />
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={3}>
+        <NestedCategoryFromFlatDepth />
       </CustomTabPanel>
     </>
   );

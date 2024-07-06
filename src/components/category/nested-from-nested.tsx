@@ -3,17 +3,17 @@ import Stack from '@mui/material/Stack';
 import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
 import { TreeItem } from '@mui/x-tree-view/TreeItem';
 import { CategoryService } from '@root/services';
-import { TCategoryWithParentId } from '@root/services/be/types/category';
+import { TCategoryNested } from '@root/services/be/types/category';
 import { useEffect, useState } from 'react';
 
-export const NestedCategory = () => {
-  const [categoryData, setCategoryData] = useState<TCategoryWithParentId[]>([]);
+export const NestedCategoryFromNested = () => {
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
+  const [categoryData, setCategoryData] = useState<TCategoryNested[]>([]);
 
   useEffect(() => {
     const getCategoryData = async () => {
       const categoryService = new CategoryService();
-      const data = await categoryService.getFlatCategoryWithParentId();
+      const data = await categoryService.getNestedCategory();
       setCategoryData(data);
     };
     getCategoryData();
@@ -26,22 +26,12 @@ export const NestedCategory = () => {
     setExpandedItems(itemIds);
   };
 
-  const mapping = new Map<number | null, TCategoryWithParentId[]>();
-  categoryData.forEach((item) => {
-    if (!mapping.get(item.parentId)) {
-      mapping.set(item.parentId, []);
-    }
-    mapping.get(item.parentId)?.push(item);
-  });
-
-  const buildTreeRecursive = (parentId: number | null) => {
-    const nodes = mapping.get(parentId);
+  const buildTreeRecursive = (nodes: TCategoryNested[]) => {
     if (!nodes || nodes.length === 0) return;
-
     return nodes.map((node) => {
       const id = node?.id?.toString();
       const title = `${node.title}(${node.id})`;
-      const children = buildTreeRecursive(node.id);
+      const children = buildTreeRecursive(node.children);
       return (
         <TreeItem key={id} itemId={id ?? ''} label={title}>
           {children}
@@ -57,7 +47,7 @@ export const NestedCategory = () => {
           expandedItems={expandedItems}
           onExpandedItemsChange={handleExpandedItemsChange}
         >
-          {buildTreeRecursive(null)}
+          {buildTreeRecursive(categoryData)}
         </SimpleTreeView>
       </Box>
     </Stack>
