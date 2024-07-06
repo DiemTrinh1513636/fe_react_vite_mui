@@ -1,6 +1,7 @@
 import { Box, Tab, Tabs } from '@mui/material';
 import { CategoryList } from '@root/components/category/list';
 import { NestedCategory } from '@root/components/category/nested';
+import { NestedCategoryFromDepth } from '@root/components/category/nested-from-depth';
 import { useState } from 'react';
 
 interface TabPanelProps {
@@ -44,6 +45,7 @@ const Category = () => {
         <Tabs value={value} onChange={handleChange}>
           <Tab label="List category" {...a11yProps(0)} />
           <Tab label="Nested category" {...a11yProps(1)} />
+          <Tab label="Nested category from depth" {...a11yProps(2)} />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
@@ -51,6 +53,9 @@ const Category = () => {
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
         <NestedCategory />
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={2}>
+        <NestedCategoryFromDepth />
       </CustomTabPanel>
     </>
   );

@@ -23,3 +23,11 @@ export type TCategory = {
     roleName: string;
   };
 };
+
+export type TCategoryWithDepth = {
+  id: number;
+  title: string;
+  parentId: number | null;
+  depth: number;
+  path: string;
+};

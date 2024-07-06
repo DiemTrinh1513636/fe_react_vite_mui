@@ -3,7 +3,7 @@ import Stack from '@mui/material/Stack';
 import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
 import { TreeItem } from '@mui/x-tree-view/TreeItem';
 import { CategoryService } from '@root/services';
-import { TCategoryWithParentId } from '@root/shared/types/category';
+import { TCategoryWithParentId } from '@root/services/be/types/category';
 import { useEffect, useState } from 'react';
 
 export const NestedCategory = () => {

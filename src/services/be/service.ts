@@ -1,5 +1,5 @@
 import { BE_PATH } from '@root/services/be/constant';
-import { TCategory, TCategoryWithParentId } from '@root/shared/types/category';
+import { TCategory, TCategoryWithDepth, TCategoryWithParentId } from '@root/services/be/types/category';
 import { Pagination } from '@root/shared/types/common';
 import axios, { Axios } from 'axios';
 
@@ -33,6 +33,16 @@ export class CategoryService {
       .get(BE_PATH.GET_FLAT_CATEGORY, {
         params,
       })
+      .then((data) => data.data)
+      .catch((error) => {
+        console.log(error);
+      });
+    return response.data;
+  }
+
+  async getFlatCategoryWithDepth(): Promise<TCategoryWithDepth[]> {
+    const response = await this._axios
+      .get(BE_PATH.GET_FLAT_CATEGORY_WITH_DEPTH)
       .then((data) => data.data)
       .catch((error) => {
         console.log(error);

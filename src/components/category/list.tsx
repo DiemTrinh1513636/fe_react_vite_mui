@@ -1,6 +1,6 @@
 import { Table, TableCell, TableHead, TableRow } from '@mui/material';
 import { CategoryService } from '@root/services/be';
-import { TCategory } from '@root/shared/types/category';
+import { TCategory } from '@root/services/be/types/category';
 import { Pagination } from '@root/shared/types/common';
 import { useEffect, useState } from 'react';
 
