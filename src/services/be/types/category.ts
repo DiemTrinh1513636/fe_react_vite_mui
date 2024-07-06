@@ -24,10 +24,10 @@ export type TCategory = {
   };
 };
 
-export type TCategoryWithDepth = {
+export type TCategoryWithDepthPath = {
   id: number;
   title: string;
-  parentId: number | null;
+  slug: string;
   depth: number;
   path: string;
 };

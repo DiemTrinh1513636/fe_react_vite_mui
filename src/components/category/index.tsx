@@ -34,7 +34,7 @@ const a11yProps = (index: number) => {
 };
 
 const Category = () => {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(2);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
