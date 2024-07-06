@@ -1,4 +1,4 @@
-import { ExpandLess, ExpandMore } from '@mui/icons-material';
+import { ExpandMore, ChevronRight } from '@mui/icons-material';
 import { Collapse, ListItemButton, ListItemText } from '@mui/material';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -28,8 +28,16 @@ export const NestedCategoryFromDepthItem = ({
     <div style={{ paddingLeft: space * (data.depth - 1) }}>
       <Collapse in={data.display}>
         <ListItemButton onClick={handleClick} selected={selected}>
-          <ListItemText primary={`[${data.id}] ${data.title}`} />
-          {hasChildren ? open ? <ExpandLess /> : <ExpandMore /> : <></>}
+          {hasChildren ? (
+            open ? (
+              <ExpandMore />
+            ) : (
+              <ChevronRight />
+            )
+          ) : (
+            <div style={{ width: 24 }}></div>
+          )}
+          <ListItemText primary={`${data.title}(${data.id})`} />
         </ListItemButton>
       </Collapse>
     </div>

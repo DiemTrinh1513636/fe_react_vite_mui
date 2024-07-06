@@ -7,8 +7,8 @@ import { TCategoryWithParentId } from '@root/services/be/types/category';
 import { useEffect, useState } from 'react';
 
 export const NestedCategory = () => {
-  const [expandedItems, setExpandedItems] = useState<string[]>([]);
   const [categoryData, setCategoryData] = useState<TCategoryWithParentId[]>([]);
+  const [expandedItems, setExpandedItems] = useState<string[]>([]);
 
   useEffect(() => {
     const getCategoryData = async () => {
@@ -26,13 +26,21 @@ export const NestedCategory = () => {
     setExpandedItems(itemIds);
   };
 
+  const mapping = new Map<number | null, TCategoryWithParentId[]>();
+  categoryData.forEach((item) => {
+    if (!mapping.get(item.parentId)) {
+      mapping.set(item.parentId, []);
+    }
+    mapping.get(item.parentId)?.push(item);
+  });
+
   const buildTreeRecursive = (parentId: number | null) => {
-    const nodes = categoryData.filter((n) => n.parentId === parentId);
-    if (nodes.length === 0) return;
+    const nodes = mapping.get(parentId);
+    if (!nodes || nodes.length === 0) return;
 
     return nodes.map((node) => {
       const id = node?.id?.toString();
-      const title = `${node.left} - ${node.title} (${node.id}) - ${node.right}`;
+      const title = `${node.title}(${node.id})`;
       const children = buildTreeRecursive(node.id);
       return (
         <TreeItem key={id} itemId={id ?? ''} label={title}>
