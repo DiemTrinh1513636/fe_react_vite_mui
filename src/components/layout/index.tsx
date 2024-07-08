@@ -36,7 +36,7 @@ export default function Layout({ children }: { children: any }) {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', marginTop: '64px' }}>
       <CssBaseline />
       <Header
         open={open}
