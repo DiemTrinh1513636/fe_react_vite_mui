@@ -79,6 +79,7 @@ export const NestedCategoryFromFlatDepth = () => {
       }));
       setCategoryData(data);
     };
+
     getCategoryData();
   }, []);
 
