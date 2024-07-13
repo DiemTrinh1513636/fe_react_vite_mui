@@ -17,40 +17,40 @@ export const CategoryList = () => {
         page: 1,
         limit: 10,
       });
-      data.items;
       setCategoryData(data);
-      setList(data.items);
+      setList(data.items ?? []);
     };
     getCategoryData();
   }, []);
-  return (
-    <Table>
-      <TableHead>
-        <TableRow>
-          <TableCell align="right">Id</TableCell>
-          <TableCell align="right">Title</TableCell>
-          <TableCell align="right">Slug</TableCell>
-          <TableCell align="right">Created Date</TableCell>
-          <TableCell align="right">Updated Date</TableCell>
-          <TableCell align="right">Created By</TableCell>
-          <TableCell align="right">Updated By</TableCell>
-        </TableRow>
-      </TableHead>
-      {list.map((item, idx) => (
-        <TableRow key={idx}>
-          <TableCell align="right">{item.id}</TableCell>
-          <TableCell align="right">{item.title}</TableCell>
-          <TableCell align="right">{item.slug}</TableCell>
-          <TableCell align="right">
-            {item.createdAt?.toISOString() ?? '-'}
-          </TableCell>
-          <TableCell align="right">
-            {item.updatedAt?.toISOString() ?? '-'}
-          </TableCell>
-          <TableCell align="right">{item.createdBy?.name}</TableCell>
-          <TableCell align="right">{item.updatedBy?.name}</TableCell>
-        </TableRow>
-      ))}
-    </Table>
-  );
+  if (list.length)
+    return (
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell align="right">Id</TableCell>
+            <TableCell align="right">Title</TableCell>
+            <TableCell align="right">Slug</TableCell>
+            <TableCell align="right">Created Date</TableCell>
+            <TableCell align="right">Updated Date</TableCell>
+            <TableCell align="right">Created By</TableCell>
+            <TableCell align="right">Updated By</TableCell>
+          </TableRow>
+        </TableHead>
+        {list.map((item, idx) => (
+          <TableRow key={idx}>
+            <TableCell align="right">{item.id}</TableCell>
+            <TableCell align="right">{item.title}</TableCell>
+            <TableCell align="right">{item.slug}</TableCell>
+            <TableCell align="right">
+              {item.createdAt?.toISOString() ?? '-'}
+            </TableCell>
+            <TableCell align="right">
+              {item.updatedAt?.toISOString() ?? '-'}
+            </TableCell>
+            <TableCell align="right">{item.createdBy?.name}</TableCell>
+            <TableCell align="right">{item.updatedBy?.name}</TableCell>
+          </TableRow>
+        ))}
+      </Table>
+    );
 };

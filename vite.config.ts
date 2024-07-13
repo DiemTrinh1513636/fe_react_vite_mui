@@ -10,6 +10,9 @@ export default defineConfig({
       external: ['react-dom'],
     },
   },
+  server: {
+    port: 5174,
+  },
   resolve: {
     alias: {
       '@root': path.resolve(__dirname, './src'),

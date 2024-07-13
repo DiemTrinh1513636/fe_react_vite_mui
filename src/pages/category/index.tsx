@@ -5,7 +5,7 @@ const CategoryPage = () => {
   return (
     <div>
       <Layout>
-        <Category></Category>
+        <Category />
       </Layout>
     </div>
   );

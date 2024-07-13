@@ -1,8 +1,3 @@
-import { useTheme } from '@emotion/react';
-import AccessibilityIcon from '@mui/icons-material/Accessibility';
-import CategoryIcon from '@mui/icons-material/Category';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
@@ -32,9 +27,14 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   color: 'white',
 }));
 
+const selectedStyle = {
+  color: 'white',
+  backgroundColor: '#86b300',
+  borderRadius: '50px',
+};
+
 const SideBar = ({ drawerWidth, open, handleDrawerClose }: SideBarProps) => {
   const location = useLocation();
-  const theme = useTheme();
   return (
     <Drawer
       sx={{
@@ -49,34 +49,42 @@ const SideBar = ({ drawerWidth, open, handleDrawerClose }: SideBarProps) => {
       anchor="left"
       open={open}
     >
-      <DrawerHeader>
-        <IconButton onClick={handleDrawerClose}>
-          Renewal
-          {theme.direction === 'ltr' ? (
-            <ChevronLeftIcon />
-          ) : (
-            <ChevronRightIcon />
-          )}
+      <DrawerHeader
+        style={{ backgroundColor: 'white' }}
+        onClick={handleDrawerClose}
+      >
+        <IconButton>
+          <img src="/src/assets/favicon.png" width={30} height={30} />
         </IconButton>
       </DrawerHeader>
       <Divider />
-      <List>
-        {menuData.map(({ title, icon, url }) => (
-          <ListItem
-            disablePadding
-            key={title}
-            style={{
-              backgroundColor:
-                location.pathname === '/' + title.toLowerCase() ? 'grey' : '',
-            }}
-            onClick={() => (window.location.href = url)}
-          >
-            <ListItemButton>
-              <ListItemIcon>{icon}</ListItemIcon>
-              <ListItemText primary={title} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+      <List style={{ margin: '0px 10px' }}>
+        {menuData.map((menu, index) => {
+          if (menu === null)
+            return (
+              <div key={index} style={{ margin: '10px 0px' }}>
+                <Divider key={index} />
+              </div>
+            );
+          const { title, icon, url } = menu;
+          return (
+            <ListItem
+              disablePadding
+              key={title}
+              style={
+                location.pathname === '/' + title.toLowerCase()
+                  ? selectedStyle
+                  : {}
+              }
+              onClick={() => (window.location.href = url)}
+            >
+              <ListItemButton>
+                <ListItemIcon>{icon}</ListItemIcon>
+                <ListItemText primary={title} />
+              </ListItemButton>
+            </ListItem>
+          );
+        })}
       </List>
     </Drawer>
   );
